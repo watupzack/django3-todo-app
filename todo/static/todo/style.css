@@ -1,0 +1,27 @@
+body {
+    font-family: 'Lato', sans-serif;
+    background-color: #D4991D;
+    color: black;
+}
+
+a {
+  color: black;
+}
+
+a:hover {
+  text-decoration: none;
+  font-weight: bold;
+  color: black;
+}
+
+.navbar-brand {
+  font-weight: bold;
+}
+
+body>nav {
+  background-color: #799A11;
+}
+
+nav li {
+  margin: 0px 5px;
+}

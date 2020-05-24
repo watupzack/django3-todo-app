@@ -1,0 +1,70 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static "todo/style.css" %}">
+  <link rel="icon" type="image/png" href="{% static "todo/myLogo.png" %}">
+  <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+  <title>Todo Woo</title>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand navbar-light">
+    <a class="navbar-brand" href="{% url 'home' %}">
+      <img src="{% static "todo/myLogo.png" %}" width=32 height=32>
+      <span>Todo Woo</span>
+    </a>
+    {% if user.is_authenticated %}
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a href="{% url 'createtodo' %}">Create</a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'currenttodos' %}">Current</a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'completedtodos' %}">Completed</a>
+        </li>
+      </ul>
+    {% endif %}
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        {% if user.is_authenticated %}
+          <li class="nav-item align-middle">
+            Logged in
+            <br>
+            as {{ user.username }}
+          </li>
+          <li class="nav-item">
+            <form action="{% url 'logoutuser' %}" method="POST">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-primary">Log out</button>
+            </form>
+          </li>
+        {% else %}
+          <li class="nav-item">
+            <a href="{% url 'signupuser' %}">Sign Up</a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'loginuser' %}">Login</a>
+          </li>
+        {% endif %}
+
+
+      </ul>
+    </div>
+  </nav>
+
+  <br>
+  <br>
+  <div class="container">
+    {% block content %}{% endblock %}
+  </div>
+</body>
+</html>
